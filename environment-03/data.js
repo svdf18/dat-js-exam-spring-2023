@@ -1,4 +1,4 @@
-const events = [
+export const events = [
     {
         title: "Meeting with Clients",
         description: "Discuss project requirements and deliverables",
@@ -30,3 +30,5 @@ const events = [
         date: "2023-06-01"
     }
 ];
+
+
