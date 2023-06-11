@@ -11,7 +11,8 @@ async function initApp() {
   console.log(postnumre);
   
   document.querySelector("#address-form").addEventListener("submit", createBrugerClicked);
-  document.querySelector("#postnr").addEventListener("keyup", postnummerChanged)
+  document.querySelector("#postnr").addEventListener("keyup", postnummerChanged);
+  document.querySelector("#by").addEventListener("keyup", byChanged)
 }
 
 async function getData() {
@@ -48,8 +49,20 @@ function createBrugerClicked(event) {
 
 function postnummerChanged() {
   const currentPostnr = document.querySelector("#postnr").value;
-  if
-  const found = postnumre.find((postnrObject) => currentPostnr === postnrObject.postnr)
-  document.querySelector("#by").value = found.by; 
-}
+  if (currentPostnr.length === 4) {
+  const found = postnumre.find((postnrObject) => currentPostnr === postnrObject.postnr);
+    
+    if(found){
+      document.querySelector("#by").value = found.by;
+    };
+  }  else {
+      document.querySelector("#by").value = "";
+    };
+};
 
+function byChanged() {
+  const currentBy = document.querySelector("#by").value;
+  const found = postnumre.find((postnrObject) => currentBy === postnrObject.by);
+  document.querySelector("#postnr").value = found ? found.postnr : "";
+
+}
