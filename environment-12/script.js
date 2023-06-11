@@ -1,49 +1,55 @@
 "use strict";
 
-let postalNumbers = [];
-let users = [];
+let postnumre = [];
+let brugere = [];
 
 window.addEventListener("load", initApp);
 
 async function initApp() {
   await getData();
 
-  console.log(postalNumbers);
-  document.querySelector("#address-form").addEventListener("submit", createUserClicked);
+  console.log(postnumre);
+  
+  document.querySelector("#address-form").addEventListener("submit", createBrugerClicked);
+  document.querySelector("#postnr").addEventListener("keyup", postnummerChanged)
 }
 
 async function getData() {
   const response = await fetch("postnumre.json");
-  postalNumbers = await response.json();
-
-  return postalNumbers;
+  postnumre = await response.json();
 }
 
-function createUser(name, address, postalNumber, city, email, newsLetter) {
-  const user = {
-    name: name,
-    address: address,
-    postalNumber: postalNumber,
-    city: city,
+function createBruger(navn, adresse, postnr, by, email, nyhedsbrev) {
+  const bruger = {
+    navn: navn,
+    adresse: adresse,
+    postnr: postnr,
+    by: by,
     email: email,
-    newsLetter: newsLetter,
+    nyhedsbrev: nyhedsbrev
   };
 
-  users.push(user);
+  brugere.push(bruger);
 }
 
-function createUserClicked(event) {
+function createBrugerClicked(event) {
   event.preventDefault();
+  console.log("clicked");
 
-  let name = document.querySelector("#navn").value;
-  let address= document.querySelector("#adresse").value;
-  let postalNumber= document.querySelector("#postnr").value;
-  let city = document.querySelector("#by").value;
+  let navn = document.querySelector("#navn").value;
+  let adresse = document.querySelector("#adresse").value;
+  let postnr = document.querySelector("#postnr").value;
+  let by = document.querySelector("#by").value;
   let email = document.querySelector("#email").value;
-  let newsLetter = document.querySelector("#nyhedsbrev").value;
+  let nyhedsbrev = document.querySelector("#nyhedsbrev").checked;
 
-  createUser(name, address, postalNumber, city, email, newsLetter);
+  createBruger(navn, adresse, postnr, by, email, nyhedsbrev)
+}
 
-  document.querySelector("#address-form").reset();
-};
+function postnummerChanged() {
+  const currentPostnr = document.querySelector("#postnr").value;
+  if
+  const found = postnumre.find((postnrObject) => currentPostnr === postnrObject.postnr)
+  document.querySelector("#by").value = found.by; 
+}
 
